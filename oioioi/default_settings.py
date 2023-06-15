@@ -1,3 +1,5 @@
+import django
+
 import sys
 
 from oioioi.base.utils.finders import find_executable_path
@@ -191,6 +193,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'oioioi.su.processors.real_user',
                 'oioioi.base.processors.base_url',
+                'oioioi.base.processors.navbar_links',
                 'oioioi.base.processors.side_menus',
                 'oioioi.base.processors.site_name',
                 'oioioi.base.processors.mathjax_location',
@@ -307,6 +310,7 @@ INSTALLED_APPS = (
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
+    'two_factor.plugins.phonenumber',
 
     'nested_admin',
     'coreapi',
@@ -636,6 +640,11 @@ LOGGING = {
             'propagate': True,
         },
         'oioioi': {
+            'handlers': ['console', 'emit_notification'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'celery': {
             'handlers': ['console', 'emit_notification'],
             'level': 'DEBUG',
             'propagate': True,
